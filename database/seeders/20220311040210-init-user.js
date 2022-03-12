@@ -1,6 +1,6 @@
 /*
  * @Date           : 2022-03-11 12:02:10
- * @FilePath       : /jinnian-cms-server/database/seeders/20220311040210-init-users.js
+ * @FilePath       : /jinnian-cms-server/database/seeders/20220311040210-init-user.js
  * @Description    : 
  */
 'use strict';
@@ -24,13 +24,15 @@ module.exports = {
     name:randomstring.generate(15),
     password:randomstring.generate(15),
     age: parseInt( Math.random()*100),
+    created_at: new Date(),
+    updated_at: new Date(),
   })
    
  }
 
    
    
-     await queryInterface.bulkInsert('users',users  , {});
+     await queryInterface.bulkInsert('user',users  , {});
 
   },
 
@@ -41,6 +43,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('users', null, {});
+     await queryInterface.bulkDelete('user', null, {});
   }
 };
