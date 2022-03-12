@@ -5,62 +5,107 @@
  */
 'use strict';
 
-function toInt(str) {
-    if (typeof str === 'number') return str;
-    if (!str) return str;
-    return parseInt(str, 10) || 0;
-  }
-
+ 
 const Controller = require('egg').Controller;
 
 class UserController extends Controller {
- async index() {
-    const ctx = this.ctx;
-    const query = {
-      limit: toInt(ctx.query.limit),
-      offset: toInt(ctx.query.offset),
+  /**
+   * 列表查询 
+   */
+ async findAll() {
+  const { ctx } = this;
+   try {
+    const params = {
+      page: ctx.query.currentPage ,
+      limit:  ctx.query.pageSize ,
     };
-    ctx.body = await ctx.model.User.findAll(query);
+    const result= await ctx.service.user.findAll(params);
+    ctx.api_success_data(result);
+   } catch (error) {
+    ctx.api_error_msg(error); 
+   }
+
+  }
+/**
+ * 根据 id 查单条数据 
+ */
+
+  async info() {
+  
+    const { ctx } = this;
+    try {
+      const _id =  ctx.request.query.id ;
+     const result= await ctx.model.User.findById(_id).exec();
+     ctx.api_success_data(result);
+    } catch (error) {
+     ctx.api_error_msg(error); 
+    }
+
+
   }
 
-  async show() {
-    const ctx = this.ctx;
-    ctx.body = await ctx.model.User.findByPk(toInt(ctx.params.id));
-  }
 
+/**
+ * 创建单条数据 
+ */
   async create() {
-    const ctx = this.ctx;
-    const { name, age } = ctx.request.body;
-    const user = await ctx.model.User.create({ name, age });
-    ctx.status = 201;
-    ctx.body = user;
-  }
+  
 
+    const { ctx } = this;
+    try {
+     const { name, age } = ctx.request.body;
+     const result= await  ctx.model.User.create({ name, age });
+     ctx.api_success_data(result);
+    } catch (error) {
+     ctx.api_error_msg(error); 
+    }
+
+
+  }
+/**
+ * 更新单条数据 
+ */
   async update() {
-    const ctx = this.ctx;
-    const id = toInt(ctx.params.id);
-    const user = await ctx.model.User.findByPk(id);
+    const { ctx } = this;
+    const _id =  ctx.request.body.id ;
+    const user = await ctx.model.User.findById(_id).exec();
     if (!user) {
-      ctx.status = 404;
+      ctx.api_error_msg('用户不存在'); 
       return;
     }
 
-    const { name, age } = ctx.request.body;
-    await user.update({ name, age });
-    ctx.body = user;
-  }
+ 
+  
+    try {
+     const { name, age } = ctx.request.body;
+     const result= await user.update({ name, age });
+     ctx.api_success_data(result);
+    } catch (error) {
+     ctx.api_error_msg(error); 
+    }
 
+
+  }
+/**
+ *  删除单条数据 
+ */
   async destroy() {
     const ctx = this.ctx;
-    const id = toInt(ctx.params.id);
-    const user = await ctx.model.User.findByPk(id);
+    const _id =  ctx.request.body.id ;
+    const user = await ctx.model.User.findById(_id).exec();
     if (!user) {
-      ctx.status = 404;
+      ctx.api_error_msg('用户不存在'); 
       return;
     }
-
-    await user.destroy();
-    ctx.status = 200;
+ 
+    try {
+   
+      const result=  await user.remove({_id });
+      ctx.api_success_data(result);
+     } catch (error) {
+      ctx.api_error_msg(error); 
+     }
+ 
   }
 }
 

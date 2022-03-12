@@ -9,16 +9,11 @@
 const Service = require('egg').Service;
 
 class AdminService extends Service {
-  async login(query) {
-      const {ctx,app} = this;
-      console.log('ctx.model',query);
-   
-      const result=  await app.model.Admin.findOne({
-          where:{
-              name: query.name,
-              password: query.password
-          }
-      })
+  async login(params) {
+      const {ctx} = this;
+     
+       console.log('params',params); 
+      const result=  await ctx.model.Admin.findOne(params).exec()
       console.log('result--resultresult--',result ); 
       return result
 

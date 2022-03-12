@@ -12,8 +12,13 @@ module.exports = {
   //   enable: true,
   // }
   // 数据库迁移 
-  sequelize :{
-   enable:true,
-   package:'egg-sequelize'
-  }
+  // sequelize :{
+  //  enable:true,
+  //  package:'egg-sequelize'
+  // }
+  mongoose:{
+    enable: true,
+  package: 'egg-mongoose',
+  } 
+
 };

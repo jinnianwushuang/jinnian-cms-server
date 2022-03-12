@@ -7,10 +7,12 @@
     "declarations": true
   },
   "dependencies": {
+    "apidoc": "^0.50.5",
     "egg": "^2.15.1",
+    "egg-mongoose": "^3.3.1",
     "egg-scripts": "^2.11.0",
-    "egg-sequelize": "^6.0.0",
-    "mysql2": "^2.3.3",
+    "live-server": "^1.2.1",
+    "mongoose-paginate": "^5.0.3",
     "randomstring": "^1.2.2"
   },
   "devDependencies": {
@@ -18,8 +20,7 @@
     "autod-egg": "^1.1.0",
     "egg-bin": "^4.11.0",
     "egg-ci": "^1.11.0",
-    "egg-mock": "^3.21.0",
-    "sequelize-cli": "^6.4.1"
+    "egg-mock": "^3.21.0"
   },
   "engines": {
     "node": ">=10.0.0"
@@ -28,6 +29,8 @@
     "start": "egg-scripts start --daemon --title=egg-server-jinnian-cms-server",
     "stop": "egg-scripts stop --title=egg-server-jinnian-cms-server",
     "dev": "egg-bin dev",
+    "doc": " apidoc -i ./app/router/ -o doc ",
+    "docs": " node ./apidoc-server.js",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
