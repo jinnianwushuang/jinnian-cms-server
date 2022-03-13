@@ -11,7 +11,7 @@ module.exports = {
    * API 成功返回体 封装
    * @param {*} param
    */
-  api_success(param) {
+  api_success(params) {
     let { code = "000000", msg = "succcess", data = "" } = params;
 
     this.body = {
@@ -32,7 +32,7 @@ module.exports = {
    * API 错误返回体 封装
    * @param {*} param
    */
-   api_error(param) {
+   api_error(params) {
     let { code = "-1", msg = "error", data = "" } = params;
 
     this.body = {

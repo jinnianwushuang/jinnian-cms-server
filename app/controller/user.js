@@ -16,8 +16,8 @@ class UserController extends Controller {
   const { ctx } = this;
    try {
     const params = {
-      page: ctx.query.currentPage ,
-      limit:  ctx.query.pageSize ,
+      page: ctx.toInt(ctx.query.currentPage)    ,
+      limit: ctx.toInt(ctx.query.pageSize)   ,
     };
     const result= await ctx.service.user.findAll(params);
     ctx.api_success_data(result);

@@ -55,15 +55,28 @@ module.exports = appInfo => {
   // };
   config.mongoose={
     client: {
-      url: 'mongodb://127.0.0.1/cms_dev_1',
+      url: 'mongodb://127.0.0.1:27017/cms_dev_1',
       options: {},
       // mongoose global plugins, expected a function or an array of function and options
       // plugins: [createdPlugin, [updatedPlugin, pluginOptions]],
     },
   } 
 
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
+    // {string|Function} origin: '*',
+    // {string|Array} allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
+  };
+ 
 
-
+  config.security = {
+    csrf: {
+      // 判断是否需要 ignore 的方法，请求上下文 context 作为第一个参数
+      ignore: (ctx) => true,
+    },
+      // domainWhiteList: [ 'http://localhost:4200' ],
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
