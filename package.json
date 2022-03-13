@@ -12,6 +12,7 @@
     "egg-cors": "^2.2.3",
     "egg-mongoose": "^3.3.1",
     "egg-scripts": "^2.11.0",
+    "egg-validate": "^2.0.2",
     "live-server": "^1.2.1",
     "mongoose-paginate": "^5.0.3",
     "randomstring": "^1.2.2"
