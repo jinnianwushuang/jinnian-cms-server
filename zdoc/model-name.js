@@ -60,9 +60,9 @@ class ModelNameController extends Controller {
       response.data = result.data;
       result.paging && (response.paging = result.paging);
       response.success = true;
-    } catch(error) {
+    } catch(err) {
       response.error = {
-        message: error,
+        message: err,
       };
       response.success = false;
     }
@@ -82,9 +82,9 @@ class ModelNameController extends Controller {
       const result = await ctx.service.modelName.get(id);
       response.data = result;
       response.success = true;
-    } catch (error) {
+    } catch (err) {
       response.error = {
-        message: error,
+        message: err,
       };
       response.success = false;
     }
@@ -102,9 +102,9 @@ class ModelNameController extends Controller {
     try {
       await ctx.service.modelName.edit(ctx.query, id);
       response.success = true;
-    } catch (error) {
+    } catch (err) {
       response.error = {
-        message: error,
+        message: err,
       };
       response.success = false;
     }
@@ -122,9 +122,9 @@ class ModelNameController extends Controller {
       const res = await ctx.service.modelName.create(ctx.request.body);
       response.data = res;
       response.success = true;
-    } catch (error) {
+    } catch (err) {
       response.error = {
-        message: error,
+        message: err,
       };
       response.success = false;
     }
@@ -142,9 +142,9 @@ class ModelNameController extends Controller {
     try {
       await ctx.service.modelName.update(ctx.request.body, id);
       response.success = true;
-    } catch (error) {
+    } catch (err) {
       response.error = {
-        message: error,
+        message: err,
       };
       response.success = false;
     }
@@ -162,9 +162,9 @@ class ModelNameController extends Controller {
     try {
       await ctx.service.modelName.destroy(id);
       response.success = true;
-    } catch (error) {
+    } catch (err) {
       response.error = {
-        message: error,
+        message: err,
       };
       response.success = false;
     }

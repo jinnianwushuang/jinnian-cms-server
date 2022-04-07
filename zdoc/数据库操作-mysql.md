@@ -8,10 +8,6 @@
 数据库表必须通过 egg 的 sequelize  实现 ，方便维护  
 https://www.eggjs.org/zh-CN/tutorials/sequelize
 https://sequelize.org/v6/
-https://sequelize.org/v6/manual/migrations.html
-
-migration 想再次执行 需要去数据库删除记录或者 改名也行 
-seed 想单个执行 需要 --seed 指定 单个文件名字 
 
 npm install --save egg-sequelize mysql2
 npm install --save-dev sequelize-cli
@@ -26,13 +22,9 @@ npx sequelize db:migrate:undo
 npx sequelize db:migrate:undo:all
 
 
-npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
-
-npx sequelize-cli seed:generate --name demo-user
-npx sequelize-cli migration:generate --name migration-skeleton
-
-npx sequelize db:seed --seed 20220312015903-init-admin.js
-
+npx sequelize seed:generate  --name init-user
+npx sequelize  model:generate --name User --attributes firstName:string,lastName:string,email:string
+npx sequelize  db:seed --seed 20220311040210-init-users.js
 
 Sequelize CLI [Node: 10.21.0, CLI: 6.0.0, ORM: 6.1.0]
 
@@ -59,8 +51,8 @@ Commands:
   sequelize model:generate                    Generates a model and its migration [aliases: model:create]
   sequelize seed:generate                     Generates a new seed file           [aliases: seed:create]
 
+
 Options:
   --version  Show version number                                                  [boolean]
   --help     Show help                                                            [boolean]
 
-Please specify a command
